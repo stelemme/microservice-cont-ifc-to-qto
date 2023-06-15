@@ -15,4 +15,13 @@ The functionality of this Microservice can be acces via the following endpoint.
   
 [http://localhost:3000/cont/ifc-to-qto](http://localhost:3000/cont/ifc-to-qto)
   
-This endpoint has a GET and POST method. The GET response of the endpoint returns a JSON object that specifies which methods and data types are supported by the endpoint. This endpoint must receive an IFC-file. The POST response then returns the converted LBD-file, in the turtle format, if the IFC-file is correctly sent in the body of the request. The process can be tested using Postman or a Controller Microservice.
+The GET response of the endpoint returns a JSON object that specifies which methods and data types are supported by the endpoint. In this case, the data it needs to receive is a JSON object with the location of the IFC-file, and the two Microservices, given as a URL, and the authentication credentials. When a POST request is sent to this endpoint, the workflow sequence is activated. The axios npm package is used to handle the necessary HTTP requests inside the POST controller. After the sequence is done, when all the Microservices have subsequently fulfilled their task, the final response is returned to the client.
+
+### Example JSON-Request
+```
+{
+    "ifc_location": <location of the IFC-file>,
+    "ifc-to-lbd_location": <location of the IFC-to-LBD Microservice>,
+    "qto_location": <location of the QTO Microservice>
+}
+```
