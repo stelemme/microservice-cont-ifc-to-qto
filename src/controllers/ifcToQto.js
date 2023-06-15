@@ -19,8 +19,7 @@ const ifcToQtoPOST = (req, res) => {
   // The data is retrieved out of the incoming HTTP POST request.
   const jsonPayload = req.body;
 
-  axios
-  .get(jsonPayload["ifc_location"], { responseType: 'arraybuffer' })
+  axios.get(jsonPayload["ifc_location"], { responseType: 'arraybuffer' })
   .then((response) => {
     const ifcFile = Buffer.from(response.data, 'binary'); 
 
@@ -31,37 +30,39 @@ const ifcToQtoPOST = (req, res) => {
       headers: { 
         'Content-Type': 'application/octet-stream'
       },
-      data : ifcFile,
+      data: ifcFile,
     };
 
-    axios.request(ifcConfig)
-    .then((response) => {
-      const lbdFile = Buffer.from(response.data, 'binary');
-      
-      let lbdConfig = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: jsonPayload["qto_location"],
-        headers: { 
-          'Content-Type': 'application/octet-stream'
-        },
-        data : lbdFile,
-      };
+    return axios.request(ifcConfig);
+  })
+  .then((response) => {
+    const lbdFile = Buffer.from(response.data, 'binary');
 
-      axios.request(lbdConfig)
-      .then((response) => {
-        res.status(200).json(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    let lbdConfig = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: jsonPayload["qto_location"],
+      headers: { 
+        'Content-Type': 'application/octet-stream'
+      },
+      data: lbdFile,
+    };
+
+    return axios.request(lbdConfig);
+  })
+  .then((response) => {
+    res.status(200).json(response.data);
   })
   .catch((error) => {
     console.log(error);
+
+    // Handle the error and send an appropriate response to the client
+    let errorMessage = 'An error occurred while processing the request.';
+    if (error.response.status) {
+      res.status(error.response.status).json(error.message)
+    }
+
+    res.status(500).json({ error: errorMessage });
   });
 };
 
