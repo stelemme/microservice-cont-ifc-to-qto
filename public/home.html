@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IFC-to-QTO Controller Microservice</title>
+  <script>
+    function redirectIfcToQto() {
+      var currentURL = window.location.href;
+      var newURL = currentURL + "cont/ifc-to-qto";
+      window.location.href = newURL;
+    }
+  </script>
+</head>
+
+<body>
+  <h2>IFC-to-QTO Controller Microservice</h2>
+  <p>The IFC-to-QTO Controller Microservice uses the same structure as the <a
+      href="https://github.com/stelemme/template-microservice-js">Express
+      template</a>. The ifcToQto.js file
+      located inside the controllers folder houses two controllers which handle the GET and POST response of the following endpoint.</p>
+  <p><a href="javascript:void(0);" onclick="redirectIfcToQto();">
+      <script>document.write(window.location.href)</script>cont/ifc-to-qto
+    </a></p>
+  <p>The GET response of the endpoint returns a JSON object that specifies which
+    methods and data types are supported by the endpoint. In this case, the data it needs to receive is a JSON object with the
+    location of the IFC-file, given as a URL, and the authentication credentials. When a POST request is sent to this endpoint,
+    the workflow sequence is activated. The axios npm package is used to handle the necessary HTTP requests inside the POST
+    controller. After the sequence is done, when all the Microservices have subsequently fulfilled their task, the final response
+    is returned to the client.</p>
+</body>
+
+</html>
