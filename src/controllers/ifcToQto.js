@@ -28,7 +28,7 @@ const ifcToQtoPOST = (req, res) => {
       maxBodyLength: Infinity,
       url: jsonPayload["ifc-to-lbd_location"],
       headers: { 
-        'Content-Type': 'application/octet-stream'
+        'Content-Type': 'application/ifc'
       },
       data: ifcFile,
     };
@@ -43,7 +43,7 @@ const ifcToQtoPOST = (req, res) => {
       maxBodyLength: Infinity,
       url: jsonPayload["qto_location"],
       headers: { 
-        'Content-Type': 'application/octet-stream'
+        'Content-Type': 'text/turtle'
       },
       data: lbdFile,
     };
