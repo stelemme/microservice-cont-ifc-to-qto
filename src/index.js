@@ -1,10 +1,10 @@
 const express = require("express");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 const app = express();
 
 // The port on which the Microservice runs
-const PORT = 3000
+const PORT = 3000;
 
 app.use(bodyParser.json());
 
@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 const homeRouter = require("./routes/home");
 app.use("/", homeRouter);
 
-// Assigning the routes to the "/op" URI
+// Assigning the routes to the "/cont" URI
 const contRouter = require("./routes/cont");
 app.use("/cont", contRouter);
 

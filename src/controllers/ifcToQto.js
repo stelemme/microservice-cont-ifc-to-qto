@@ -1,13 +1,6 @@
-const path = require("path");
 const axios = require('axios');
 
 const ifcToQtoGET = (req, res) => {
-  res.set({
-    Server: "My Node.js Server",
-    "Content-Type": "application/json",
-    "Content-Length": 155,
-  });
-
   res.status(200).json({
     supported_methods: ["GET", "POST"],
     POST_request_data: "application/json",

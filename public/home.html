@@ -26,7 +26,7 @@
     </a></p>
   <p>The GET response of the endpoint returns a JSON object that specifies which
     methods and data types are supported by the endpoint. In this case, the data it needs to receive is a JSON object with the
-    location of the IFC-file, given as a URL, and the authentication credentials. When a POST request is sent to this endpoint,
+    location of the IFC-file, and the Microservices, given as a URL, and the authentication credentials. When a POST request is sent to this endpoint,
     the workflow sequence is activated. The axios npm package is used to handle the necessary HTTP requests inside the POST
     controller. After the sequence is done, when all the Microservices have subsequently fulfilled their task, the final response
     is returned to the client.</p>
